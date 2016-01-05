@@ -4,7 +4,7 @@
   "description": "Mixin util for React",
   "main": "index.js",
   "peerDependencies": {
-    "react": "0.13.x"
+    "react": ">= 0.13.3"
   },
   "scripts": {
     "test": "jest"
