@@ -1,0 +1,31 @@
+{
+  "name": "reactjs-mixin",
+  "version": "0.0.1",
+  "description": "Mixin util for React",
+  "main": "index.js",
+  "peerDependencies": {
+    "react": "0.13.x"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesosphere/reactjs-mixin.git"
+  },
+  "keywords": [
+    "react",
+    "mixin",
+    "util"
+  ],
+  "author": "Mesosphere Web Team",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/mesosphere/reactjs-mixin/issues"
+  },
+  "homepage": "https://github.com/mesosphere/reactjs-mixin#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "jest-cli": "^0.4.15"
+  }
+}
