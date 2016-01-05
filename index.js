@@ -47,8 +47,8 @@ function es6ify(mixin) {
       delete clonedMixin[staticProp];
     });
 
-    // Omit lifecycle functions because we are already storing them elsewhere
-    Util.extend(MixinClass.prototype, Util.omit(clonedMixin, lifecycleFunctions));
+    // Exclude lifecycle functions because we are already storing them elsewhere
+    Util.extend(MixinClass.prototype, Util.exclude(clonedMixin, lifecycleFunctions));
 
     return MixinClass;
   };
