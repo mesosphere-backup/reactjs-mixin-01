@@ -6,10 +6,11 @@
  * This is not the original file, and has been modified
  */
 
-import _ from "underscore";
-import React from "react";
+var React = require("react");
 
-let lifecycleFunctions = [
+var Util = require("./Util");
+
+var lifecycleFunctions = [
   "componentWillMount", "componentDidMount",
   "componentWillReceiveProps", "componentWillUpdate", "componentDidUpdate",
   "componentWillUnmount", "render"
@@ -31,11 +32,13 @@ function es6ify(mixin) {
   return function (Base) {
     // mixin is old-react style plain object
     // convert to ES6 class
-    class MixinClass extends Base {}
+    function MixinClass() {}
+    MixinClass.prototype = Object.create(Base.prototype);
+    MixinClass.prototype.constructor = MixinClass;
 
-    const clonedMixin = _.extend({}, mixin);
+    var clonedMixin = Util.extend({}, mixin);
     // These React properties are defined as ES7 class static properties
-    let staticProps = [
+    var staticProps = [
       "childContextTypes", "contextTypes",
       "defaultProps", "propTypes"
     ];
@@ -45,7 +48,7 @@ function es6ify(mixin) {
     });
 
     // Omit lifecycle functions because we are already storing them elsewhere
-    _.extend(MixinClass.prototype, _.omit(clonedMixin, lifecycleFunctions));
+    Util.extend(MixinClass.prototype, Util.omit(clonedMixin, lifecycleFunctions));
 
     return MixinClass;
   };
@@ -58,15 +61,16 @@ function setLifecycleMixinHandler(proto, lifecycleFn, mixins) {
     return;
   }
 
-  proto[lifecycleFn] = function (...args) {
-    mixins.forEach((mixin) => {
+  proto[lifecycleFn] = function () {
+    var args = Array.prototype.slice.call(arguments);
+    mixins.forEach(function (mixin) {
       mixin.apply(this, args);
-    });
+    }.bind(this));
   };
 }
 
 function addLifeCycleFunctions(proto, mixins) {
-  let mixinLifecycleFnMap = {};
+  var mixinLifecycleFnMap = {};
   mixins.forEach(function (mixin) {
     lifecycleFunctions.forEach(function (lifecycleFn) {
       if (mixin[lifecycleFn] == null) {
@@ -89,11 +93,15 @@ function addLifeCycleFunctions(proto, mixins) {
   });
 }
 
-function mixin (...mixins) {
-  // Creates base class
-  class Base extends React.Component {}
+function mixin() {
+  var mixins = Array.prototype.slice.call(arguments);
 
+  // Creates base class
+  function Base() {}
+  Base.prototype = Object.create(React.Component.prototype);
+  Base.prototype.constructor = Base;
   Base.prototype.shouldComponentUpdate = trueNoop;
+
   addLifeCycleFunctions(Base.prototype, mixins);
 
   mixins.reverse();
@@ -105,4 +113,4 @@ function mixin (...mixins) {
   return Base;
 }
 
-export default mixin;
+module.exports = mixin;
