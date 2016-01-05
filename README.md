@@ -16,7 +16,11 @@ A mixin util for React 0.13+
     import Mixin2 from "./Mixin2";
     
     class Table extends mixin(Mixin1, Mixin2) {
-      ...
+      // Reactjs-mixin extends from React.Component, providing React methods.
+      render() {
+        return (
+          ...
+        );
+      }
     }
   ```
-Reactjs-mixin extends from `React.Component` along with the mixins that are passed in.
