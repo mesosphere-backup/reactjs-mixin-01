@@ -1,10 +1,10 @@
 {
   "name": "reactjs-mixin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Mixin util for React",
   "main": "index.js",
   "peerDependencies": {
-    "react": "0.13.x"
+    "react": ">= 0.13.3"
   },
   "scripts": {
     "test": "jest"
