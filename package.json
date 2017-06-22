@@ -26,6 +26,6 @@
   "homepage": "https://github.com/mesosphere/reactjs-mixin#readme",
   "dependencies": {},
   "devDependencies": {
-    "jest-cli": "^0.4.15"
+    "jest-cli": "^20.0.4"
   }
 }
