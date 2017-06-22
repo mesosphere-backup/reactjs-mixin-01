@@ -1,4 +1,6 @@
 # ReactJS-mixin
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/dcos/reactjs-mixin.svg)](https://greenkeeper.io/)
 A mixin util for React 0.13+
 
 ## Using the mixin util
